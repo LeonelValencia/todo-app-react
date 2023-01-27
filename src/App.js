@@ -8,7 +8,7 @@ import './App.css';
 const defaultTodos = [
   { text: 'cortar cebolla', completed: true},
   { text: 'Tomar el curso de intro a react', completed: false},
-  { text: 'llorar con la llorona', completed: true},
+  { text: 'llorar con la llorona', completed: false},
 ]
 
 function App() {
@@ -28,6 +28,19 @@ function App() {
     })
   }
 
+  const toggleCompleteTodos  = (text) => {
+    const todoIndex = todos.findIndex(todo => todo.text === text);
+    const newTodos = [...todos]
+    newTodos[todoIndex].completed = !newTodos[todoIndex].completed;
+    setTodos(newTodos);
+  }
+  const deleteTodo = (text) => {
+    const todoIndex = todos.findIndex(todo => todo.text === text);
+    const newTodos = [...todos]
+    newTodos.splice(todoIndex, 1);
+    setTodos(newTodos);
+  }
+
   return (
     <React.Fragment>
       <h1>TODO APP</h1>
@@ -44,7 +57,13 @@ function App() {
         
         <TodoList>
           {searchedTodos.map(todo => (
-            <TodoItem key={todo.text} text={todo.text} completed={todo.completed}/>
+            <TodoItem 
+              key={todo.text} 
+              text={todo.text} 
+              completed={todo.completed}
+              onComplete={()=> toggleCompleteTodos (todo.text)}  
+              onDelete={()=> deleteTodo(todo.text)}  
+            />
           ))}
         </TodoList>
 
