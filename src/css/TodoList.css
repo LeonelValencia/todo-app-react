@@ -4,3 +4,10 @@ ul {
     list-style: none;
     min-width: 250px;
 }
+
+@media (min-width: 750px) {
+    ul {
+      width: 600px;
+      text-align: center;
+    }  
+  }
